@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Register page</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/register.css">
+</head>
+<body>
+    <script>
+        function checkForm(){
+            var name = document.getElementById('name').value;
+            var studentId= document.getElementById('studentId').value;
+            var email = document.getElementById('email').value;
+            var emailReg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+            if(name==""){
+                alert('姓名是必填项')
+                return false
+            };
+            if(studentId == ""){
+                alert('学号是必填项')
+                return false
+            }
+            if(email==""){
+                alert('邮箱是必填项')
+                return false
+            }
+            if(! emailReg.test(email)){
+                alert('邮箱格式错误')
+                return false
+            }
+            document.getElementById('myForm').submit()
+            alert("信息已经被提交，请查看邮件")
+        }
+    </script>
+    <div class="register-panel">
+        <div class="logo"></div>
+        <!-- 给server端提交 action跳转到 --> 
+        <form action="https://90293e61-6787-44b6-81e0-4840bb66c936.mock.pstmn.io/register" method="post" id='myForm'></form>
+            <ul class='inputUl'>
+                <li class='inputFrame'>
+                    <div class='left'>
+                        <i class='fa fa-user-o icon'></i>
+                        <span class='name'>姓名</span>
+                    </div>
+                    <div class='right'>
+                        <input type="text" class='input-content' id = 'name' name= 'name'>
+                    </div>
+                </li>            
+                <li class='inputFrame'>
+                    <div class='left'>
+                        <i class='fa fa-star-o icon'></i>
+                        <span class='name'>学号</span>
+                    </div>
+                    <div class='right'>
+                        <input type="text" class='input-content' id = 'studentId' name= 'studentId'>
+                    </div>
+                </li>
+                <li class='inputFrame'>
+                    <div class='left'>
+                        <i class='fa fa-envelope-o fa-fw icon'></i>
+                        <span class='name'>邮箱</span>
+                    </div>
+                    <div class='right'>
+                        <input type="text" class='input-content' id ='email' name='email'>
+                    </div>
+                </li>
+                <input type='submit' class='inputFrame' id='loginButton' value='Register' onclick="return checkForm()">
+            </ul>
+        </form>    
+    </div>
+</body>
+</html>

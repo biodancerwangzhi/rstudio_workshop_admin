@@ -8,7 +8,7 @@ django.setup()
 
 import random,string
 from app1 import models
-
+'''
 password_count = 100
 all_passwds = []
 for i in range(int(password_count)):
@@ -33,3 +33,7 @@ for passwd in all_passwds:
     userObj = models.linuxUser.objects.create(user = num_str, password = passwd, used = 0)
     userObj.save()
     num +=1
+'''
+a = models.linuxUser.objects.filter(user='test00')[0]
+a.used =0
+a.save()     

@@ -85,15 +85,19 @@ def register(request):
         linux_user_status, linux_user, linux_pwd = get_linux_user_pwd()
         if linux_user_status == 0:
             ret['Info'] = 'linux user register failed'
-            models.linuxUser.objects.filter(user=linux_user)[0].used = 0
+            linuxUserObj = models.linuxUser.objects.filter(user=linux_user)[0]
+            linuxUserObj.used = 0
+            linuxUserObj.save()
             return JsonResponse(ret)
         
         email_content = generate_email_content(username, linux_user, linux_pwd)
         # make sure email sending successfully
         send_status = send_email(email, email_content)
         if send_status == 0:
-            models.linuxUser.objects.filter(user=linux_user)[0].used = 0
-            ret['Info'] = 'Email sending error, please make sure the email can be linked.'
+            ret['Info'] = 'email sending error'
+            linuxUserObj = models.linuxUser.objects.filter(user=linux_user)[0]
+            linuxUserObj.used = 0
+            linuxUserObj.save()
             return JsonResponse(ret)
 
         # 实例化用户，然后赋值
